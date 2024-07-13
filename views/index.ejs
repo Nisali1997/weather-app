@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Weather App</title>
+</head>
+<body>
+  <main>
+    <section class="container">
+        <div class="row1">
+
+          <form  action="/weather" method="get" id="search-form">
+            <input type="text" name="city" placeholder="Enter city name" class="search-form" required />
+            <button type="submit">Get Weather</button>
+          </form>
+
+          <% if (typeof weatherData !== 'undefined') { %>
+          <h1 class="city-title" id="searched-city">
+            <%= weatherData.name %>, <%= weatherData.sys.countryName %>
+          </h1>
+        </div>
+      
+    </section>
+
+    <div class="main-body">
+      <section class="current-weather">
+        <div class="container">
+          <div class="row2">
+
+            <div class="col">
+                <h1 class="temp-title"><%= weatherData.sys.roundedTemp %>°</h1>  
+                <p class="feels-like">Feels like : <%= weatherData.sys.roundedTemp %></p>
+            </div>
+            
+            <div class="col todays-info">
+              <p id="current-time"><%= weatherData.sys.currentTime %></p>
+              <h2 id="current-day">Today</h2>
+              <p id="weather-type"><%= weatherData.weather[0].description %></p>
+            </div>
+            <div class="col side-info">
+              <ul>
+                <li>Humidity: <%= weatherData.main.humidity %>%<span id="humidity"></span></li>
+                <li>Wind: <%= weatherData.wind.speed %> km/ h<span id="wind"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+      
+    <% } else if (typeof errorMessage !== 'undefined') { %>
+      <div class="main-body">
+          <p>Error : <%= errorMessage %></p>
+      </div>
+    <% } %> 
+
+    <footer></footer>
+  </main> 
+</body>
+</html>
